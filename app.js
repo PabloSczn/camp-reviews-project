@@ -13,7 +13,7 @@ db.once("open", () => {
 
 const app = express();
 
-app.set('view wngine', 'ejs');
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => {
