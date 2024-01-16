@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const Campground = require('./models/campground')
+const methodOverride = require('method-override');
+const Campground = require('./models/campground');
 
 mongoose.connect('mongodb://127.0.0.1:27017/camp-reviews');
 
@@ -16,7 +17,8 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
     res.send('home')
@@ -37,10 +39,22 @@ app.post('/campgrounds', async (req, res) => {
     res.redirect(`/campgrounds/${campground._id}`)
 })
 
+app.get('/campgrounds/:id/edit', async (req, res) => {
+    const id = req.params.id;
+    const campground = await Campground.findById(id);
+    res.render('campgrounds/edit.ejs', {campground})
+})
+
 app.get('/campgrounds/:id', async (req, res) => {
     const id = req.params.id;
     const campground = await Campground.findById(id);
     res.render('campgrounds/show.ejs', {campground})
+});
+
+app.put('/campgrounds/:id', async (req, res) => {
+    const id = req.params.id;
+    const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
+    res.redirect(`/campgrounds/${campground._id}`)
 });
 
 app.listen(3000, () => {
