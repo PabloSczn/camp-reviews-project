@@ -87,8 +87,9 @@ app.all('*', (req, res, next) => { // Catch-all route to handle all other paths
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    const {statusCode = 500, message = 'Something went wrong'} = err; // Default error message and status
-    res.status(statusCode).send(message); // Send the error message with the status code
+    const {statusCode = 500} = err; // Default error status
+    if(!err.message) err.message = 'Something went wrong' // Default error message
+    res.status(statusCode).render('error', {err}); // Send the error message with the status code
 })
 
 // Start the server
