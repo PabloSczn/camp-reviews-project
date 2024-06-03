@@ -3,7 +3,7 @@
 'GoodCamps' is Camp Reviews Project. It is a web application designed to allow users to view, add, edit, and delete campground information. It features a list of campgrounds with detailed views for each, including descriptions, images, and locations. Built with Node.js, Express, MongoDB, and EJS, it provides a straightforward and interactive experience for camp enthusiasts to share and discover great camping spots.
 It is an implementation of YelpCamp by Colt Steele!
 # Note
-It is still under development!
+**It is still under development!**
 
 ## Features
 
@@ -54,10 +54,10 @@ npm install
 5. Start the application:
 
 ```bash
-npm start
+node app.js
 ```
 
-6. Visit `http://localhost:3000` in your web browser to view the application.
+6. Visit `http://localhost:3000/campgrounds` in your web browser to view the application.
 
 ## Usage
 
